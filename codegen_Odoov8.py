@@ -163,7 +163,7 @@ class OpenERPRenderer(ObjRenderer) :
         "depends" : ['base'],
         "init_xml" : [ ],
         "demo_xml" : [ ],
-        "update_xml" : ['%(module)s_view.xml', 'security/ir.model.access.csv'],
+        "update_xml" : ['views/%(module)s_view.xml', 'security/ir.model.access.csv'],
         "installable": True
 }""" % self.data_get()
         return terp
@@ -203,19 +203,19 @@ class OpenERPRenderer(ObjRenderer) :
 
     def get_label(self, attrs):
         label = None
-        if attrs[0] == 'many2many':
+        if attrs[0] == 'Many2many':
             for att in attrs[2].split(','):
                 if 'string' in att:
                     label = att[8:]
             if not label:
                 label = attrs[2].split(',')[4]
-        if attrs[0] == 'one2many':
+        if attrs[0] == 'One2many':
             for att in attrs[2].split(','):
                 if 'string' in att:
                     label = att[8:]
             if not label:
                 label = attrs[2].split(',')[2]
-        if attrs[0] == 'text':
+        if attrs[0] == 'Text':
             for att in attrs[2].split(','):
                 if 'string' in att:
                     label = att[8:]
@@ -231,12 +231,12 @@ class OpenERPRenderer(ObjRenderer) :
         for sa,attr in cd.attributes:
             cols[sa] = True
             attrs = ''
-            if attr[0] in ('one2many', 'many2many', 'text'):
+            if attr[0] in ('One2many', 'Many2many', 'Text'):
                 attrs='colspan="4" nolabel="1" '
                 field_label = self.get_label(attr)
                 fields_form += ("                <separator string=\"%s\" colspan=\"4\"/>\n") % (field_label or 'Unknown')
             fields_form += ("                <field name=\"%s\" "+attrs+"select=\"%d\"/>\n") % (sa,i)
-            if attr[0] not in ('one2many', 'many2many'):
+            if attr[0] not in ('One2many', 'Many2many'):
                 fields_tree += "                <field name=\"%s\"/>\n" % (sa,)
             if (i==2) or not i:
                 i=-1
