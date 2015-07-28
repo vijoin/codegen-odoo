@@ -234,7 +234,7 @@ class OpenERPRenderer(ObjRenderer) :
             if attr[0] in ('One2many', 'Many2many', 'Text'):
                 attrs='colspan="4" nolabel="1" '
                 field_label = self.get_label(attr)
-                fields_form += ("                <separator string=\"%s\" colspan=\"4\"/>\n") % (field_label or 'Unknown')
+                fields_form += ("                <separator string=%s colspan=\"4\"/>\n") % (field_label or 'Unknown')
             fields_form += ("                <field name=\"%s\" "+attrs+"select=\"%d\"/>\n") % (sa,i)
             if attr[0] not in ('One2many', 'Many2many'):
                 fields_tree += "                <field name=\"%s\"/>\n" % (sa,)
