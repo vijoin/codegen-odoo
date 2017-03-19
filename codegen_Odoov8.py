@@ -289,14 +289,14 @@ class OpenERPRenderer(ObjRenderer) :
 
     def view_get(self):
         result = """<?xml version="1.0"?>
-<openerp>
+<odoo>
 <data>
 """
         for sk in self.klass_names:
             result += self.view_class_get(sk, self.klasses[sk])
         result += """
 </data>
-</openerp>"""
+</odoo>"""
         return result
 
 
