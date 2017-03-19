@@ -259,6 +259,7 @@ class OpenERPRenderer(ObjRenderer) :
         if 'date' in cols:
             data['mode']='tree,form,calendar'
         result = """
+    <!-- VISTA FORM: %(menu)s -->
     <record model="ir.ui.view" id="view_%(name_id)s_form">
         <field name="name">%(name)s.form</field>
         <field name="model">%(name)s</field>
@@ -271,6 +272,9 @@ class OpenERPRenderer(ObjRenderer) :
             </form>
         </field>
     </record>
+    <!-- FIN VISTA FORM: %(menu)s -->
+    
+    <!-- VISTA TREE: %(menu)s -->
     <record model="ir.ui.view" id="view_%(name_id)s_tree">
         <field name="name">%(name)s.tree</field>
         <field name="model">%(name)s</field>
@@ -281,14 +285,19 @@ class OpenERPRenderer(ObjRenderer) :
             </tree>
         </field>
     </record>
+    <!-- FIN VISTA TREE: %(menu)s -->
+    
+    <!-- MODELO: %(name_en)s -->
     <record model="ir.actions.act_window" id="action_%(name_id)s">
         <field name="name">%(name_en)s</field>
         <field name="res_model">%(name)s</field>
         <field name="view_type">form</field>
         <field name="view_mode">%(mode)s</field>
     </record>
+    <!-- FIN MODELO: %(name_en)s -->
+    
+    <!-- MENÚ SECUNDARIO: %(menu)s -->
     <menuitem name="%(menu)s" id="menu_%(name_id)s" action="action_%(name_id)s"/>
-
         """ % data
         return result
 
