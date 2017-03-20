@@ -312,7 +312,7 @@ class OpenERPRenderer(ObjRenderer) :
     <!-- FIN MODELO: %(name_en)s -->
     
     <!-- MENÚ SECUNDARIO: %(menu)s -->
-    <menuitem name="%(menu)s" id="menu_%(name_id)s" action="action_%(name_id)s"/>
+    <menuitem name="%(menu)s" id="menu_%(name_id)s" action="action_%(name_id)s" parent="men_sec"/>
         """ % data
         return result
 
@@ -324,6 +324,11 @@ class OpenERPRenderer(ObjRenderer) :
         for sk in self.klass_names:
             result += self.view_class_get(sk, self.klasses[sk])
         result += """
+
+    <!-- MENÚ PRINCIPAL -->
+    <menuitem name="%(module)s" id="men_pri"/>
+    <!-- Coloque aqui los menú secundarios que se crean en cada clase -->
+
 </data>
 </odoo>"""
         return result
