@@ -165,7 +165,7 @@ class OpenERPRenderer(ObjRenderer) :
     'depends': ['base'],
     'data': ['security/ir.model.access.csv', 'views/%(module)s_view.xml'],
     'demo': [ ],
-    'css': [ ],
+    'css': ['static/src/less/%(module)s.less'],
     'update_xml': [ ],
     'installable': True,
     'auto_install': False,
@@ -188,7 +188,14 @@ class OpenERPRenderer(ObjRenderer) :
     </section>
     <section class="oe_container oe_dark"></section>
     """
-            
+
+     def less_get(self):
+        return """@charset "utf-8";
+    /*------------------------------
+    * Coloque aqui los estilos
+    *-------------------------------
+    */"""
+  
     def init_get(self):
         return """# -*- coding: utf-8 -*-
 ##############################################################################
@@ -434,6 +441,7 @@ from odoo import api, fields, models
                 'views/'+module+'_view.xml': self.view_get(),
                 'security/ir.model.access.csv': self.security_get(),
                 'static/description/index.html': self.html_get(),
+                'static/src/less/'+module+'.less': self.less_get()
         }
         for name,datastr in filewrite.items():
             info = zipfile.ZipInfo(module+'/'+name)
