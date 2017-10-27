@@ -189,7 +189,7 @@ class OpenERPRenderer(ObjRenderer) :
     <section class="oe_container oe_dark"></section>
     """
 
-     def less_get(self):
+    def less_get(self):
         return """@charset "utf-8";
     /*------------------------------
     * Coloque aqui los estilos
